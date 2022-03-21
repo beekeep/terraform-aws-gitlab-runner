@@ -36,8 +36,9 @@ fi
 
 if ! ( rpm -q gitlab-runner >/dev/null )
 then
-  curl --fail --retry 6 -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh | bash
-  yum install gitlab-runner-${gitlab_runner_version} -y
+  yum install -y git
+  curl -LJO "https://gitlab-runner-downloads.s3.amazonaws.com/latest/rpm/gitlab-runner_amd64.rpm"
+  rpm -i gitlab-runner_amd64.rpm
 fi
 
 if [[ `echo ${docker_machine_download_url}` == "" ]]
